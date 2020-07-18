@@ -1,12 +1,17 @@
 var m = require("mithril")
 
 module.exports = {
-    view: function(vnode) {
-        return m("main.layout", [
-            m("nav.menu", [
-                m(m.route.Link, {href: "/list"}, "Expenses")
-            ]),
-            m("section", vnode.children)
-        ])
+
+    view(vnode) {
+        return (
+            <div class={"main layout"}>
+                <div class={"nav menu"}>
+                    <m.route.Link href={"/"}>Home</m.route.Link>
+                     |
+                    <m.route.Link href={"/list"}>Expenses</m.route.Link>
+                </div>
+                <div class={"section"}>{vnode.children}</div>
+            </div>
+        )
     }
 }

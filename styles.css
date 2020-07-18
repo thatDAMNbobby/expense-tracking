@@ -64,6 +64,16 @@ body, .input, .button {
     background: #e8e8e8;
 }
 
+table.expense-list-table {
+    table-layout: fixed;
+    border: 1px solid black;
+}
+
+tr:hover {
+    background-color: cadetblue;
+}
+
+
 /* mithril-datepicker ********************/
 .mithril-date-picker-container {
     position: relative;
