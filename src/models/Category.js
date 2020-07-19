@@ -11,38 +11,71 @@ const defaultData = {
 }
 
 module.exports = {
-
-  current: {},
   list: [],
   next: 3,
-  load: () => {
+  loadList: function() {
     var things = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || defaultData
+    console.log("category loadList: things is", things)
     this.list = things.categories
-    this.next = this.list.slice(-1).id + 1
+    console.log("category loadList: this.list is", this.list)
+    if (this.list === undefined) {
+      console.log("category loadList: there was no data, using the default")
+      this.list = defaultData.categories
+    }
+    console.log("category loadList: this.list is now", this.list)
+    this.next = this.list.length
+    console.log("category loadList: this.next is now", this.next)
   },
 
-  save: (id) => {
+  current: {},
+  load: function(id) {
+    this.loadList()
+    console.log("category load: loading id", id)
+    const found = this.list.find(v => v.id == id)
+    if (found !== undefined) {
+      console.log("category load: found", found)
+      this.current = found
+    } else {
+      this.current = {id: this.next}
+    }
+    console.log("category load: current", this.current)
+  },
+
+  save: function(id) {
+    console.log("category save: id", id)
     const existingIndex = this.list.findIndex(v => v.id == id)
 
     if (id && existingIndex !== -1) {
       console.log("category save: found existing")
-      this.list[existing] = this.current
+      this.list[existingIndex] = this.current
       console.log("category save: updated element", existingIndex, "to", this.current)
     } else {
       // make a new one
-      this.current.id = this.next
+      console.log("category save: making a new category")
+      this.current = {id: this.next}
+      console.log("category save: current.id", this.current.id)
+      this.list.push(this.current)
     }
 
+    this.writeOut()
+    m.route.set('/categories')
   },
 
-  new: () => {
+  find: function(id) {
+    return this.list.find(v => v.id == id)
+  },
+
+  new: function() {
     this.save()
-    m.route.set('/editCategory'+this.current.id)
+    console.log("category new: routing to edit id", this.current.id)
+    m.route.set('/categories/edit/'+this.current.id)
+    this.current = {}
   },
 
   writeOut: function() {
       // get the live data
-      var data = localStorage.getItem(LOCAL_STORAGE_KEY) || defaultData
+      var data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || defaultData
+      console.log("writeOut: got data", data)
       // replace the appropriate stuff
       data.categories = this.list
       // write it

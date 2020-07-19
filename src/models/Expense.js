@@ -2,25 +2,33 @@ var m = require("mithril")
 
 const LOCAL_STORAGE_KEY = "expenseTrackingData"
 
+const defaultData = {
+  next:0,
+  list:[]
+}
+
 module.exports = {
     list: [],
     next: 0,
     loadList: function() {
-        var things = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || { next: 0, list: [] }
-        this.next = things.next
-        this.list = things.list.filter(v => v.name)
+        const things = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || defaultData
+        this.next = things.next || defaultData.next
+        this.list = things.list || defaultData.list
+        console.log("loadlist: things is", things)
+        console.log("loadlist: things.list is", things.list)
     },
 
     current: {},
     load: function(id) {
         this.loadList()
         console.log("load: looking for id", id)
-        const found = this.list.find(thing => thing.id == id)
-        console.log("load: found", found)
+        const found = this.list.find(v => v.id == id)
         if (found !== undefined) {
+            console.log("load: found", found)
             this.current = found
         } else {
-            this.current = {id: id}
+            console.log("load: not found, making a new one with id", id)
+            this.current = {id: this.next}
         }
         console.log("load: current", this.current)
     },
@@ -31,11 +39,14 @@ module.exports = {
         if (id && existingIndex !== -1) {
             console.log("save: found existing")
             this.list[existingIndex] = this.current
-            console.log("save: updated element",existingIndex, "to", this.current)
+            console.log("save: updated element", existingIndex, "to", this.current)
         } else {
             // make a new one
-            this.current.id = this.next
-            this.current.date = Date.now()
+            console.log("save: making a new expense")
+            this.current = {
+                id: this.next,
+                date: Date.now()
+            }
             console.log("new: current is", this.current)
             this.list.push(this.current)
             console.log("save: list appended with", this.current)
@@ -44,7 +55,6 @@ module.exports = {
         }
 
         console.log("save: list is now", this.list)
-        this.current = {}
         this.writeOut()
         m.route.set('/list')
     },
@@ -58,7 +68,13 @@ module.exports = {
     },
 
     writeOut: function() {
-        const data = {next: Number(this.next), list: this.list}
+        // get the live data
+        var data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || defaultData
+        console.log("writeout: pulled data", data)
+        // replace the appropriate stuff
+        data.next = Number(this.next)
+        data.list = this.list
+        // write it
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data))
         console.log("writeOut: wrote", data)
     },

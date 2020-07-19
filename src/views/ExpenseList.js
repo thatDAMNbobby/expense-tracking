@@ -2,28 +2,37 @@ var m = require("mithril")
 var moment = require("moment")
 var Table = require("../Components/Table")
 var Expense = require("../models/Expense")
+var Category = require("../models/Category")
 
 module.exports = {
-    oninit() { Expense.loadList() },
+    oninit() {
+        Expense.loadList()
+        Category.loadList()
+    },
     view() {
 
         const rows = Expense.list.map(v => {
             v.date = moment(v.date).format('YYYY/MM/DD')
+            v.category = (Category.find(v.category) || {name: ""}).name
             return v
         })
 
-        console.log(rows)
+        console.log("expense list: rows", rows)
 
-        return [
+        return (
+            <div class={"expense-list"}>
             <Table
                 columns={columns}
-                rows={rows}/>,
-
+                rows={rows}
+                path={"/edit/"}
+                tableClass={"expense-list-table"}
+            />
             <button onclick={e => {
                 e.preventDefault()
                 Expense.new()
             }}>New</button>
-        ]
+            </div>
+        )
     }
 }
 

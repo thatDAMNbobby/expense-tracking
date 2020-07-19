@@ -4,7 +4,7 @@ var Table = require("../Components/Table")
 
 module.exports = {
 
-    oninit() { Category.load() },
+    oninit() { Category.loadList() },
     view() {
 
         const categories = Category.list
@@ -18,15 +18,13 @@ module.exports = {
                 <h1>Catgeories</h1>
                 <Table rows={categories}
                        columns={columns}
-                       path={"/categories/edit"}
+                       path={"/categories/edit/"}
                        tableClass={"category-list-table"}
-                       //rowClass={"category-list-item"}
                 />
                 <button onclick={e => {
                     e.preventDefault()
                     Category.new()
-                }}>New
-                </button>
+                }}>New</button>
             </div>
         )
     }

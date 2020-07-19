@@ -34,6 +34,27 @@ body, .input, .button {
     background-color: cadetblue;
 }
 
+.category-list {
+    list-style: none;
+    margin: 0 0 10px;
+    padding: 0;
+}
+
+.category-list-item {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    color: #333;
+    display: block;
+    margin: 0 0 1px;
+    padding: 8px 15px;
+    text-decoration: none;
+}
+
+.category-list-item:hover {
+    text-decoration: underline;
+    background-color: cadetblue;
+}
+
 .label {
     display: block;
     margin: 0 0 5px;
@@ -65,12 +86,49 @@ body, .input, .button {
 }
 
 table.expense-list-table {
+    width: 100%;
     table-layout: fixed;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table.expense-list-table tr {
+    height: 30px;
     border: 1px solid black;
 }
 
+table.expense-list-table td {
+    height: 30px;
+    border: 1px solid black;
+}
+
+table.category-list-table th {
+    background-color: #afceec;
+}
+
+table.category-list-table {
+    width: 40%;
+    table-layout: fixed;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table.category-list-table tr {
+    height: 30px;
+    border: 1px solid black;
+}
+
+table.category-list-table td {
+    height: 30px;
+    border: 1px solid black;
+}
+
+table.category-list-table th {
+    background-color: #afceec;
+}
+
 tr:hover {
-    background-color: cadetblue;
+    background-color: #555555;
 }
 
 

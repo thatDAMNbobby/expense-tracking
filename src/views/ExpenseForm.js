@@ -1,32 +1,18 @@
 var m = require("mithril")
 var Expense = require("../models/Expense")
 var DatePicker = require('mithril-datepicker')
+var Category = require("../models/Category")
 
 module.exports = {
 
-    oninit: (vnode) => { Expense.load(vnode.attrs.id) },
+    oninit: (vnode) => {
+        Expense.load(vnode.attrs.id)
+        Category.loadList()
+    },
     view(vnode) {
         const expense = Expense.current
         const date = Date(expense.date) || Date.now()
-
-        // TODO - get this working correctly
-        let CurrencyInput = {
-            oninit(vnode) {
-                this.value = (vnode.attrs.value || '').toLowerCase().replace(/[^0-9.]+/g, '')
-            },
-            view(vnode) {
-                return (
-                    <input {...vnode.attrs}
-                       value={this.value}
-                       oninput={ e => {
-                           e.preventDefault()
-                           e.target.value = e.target.value.toLowerCase().replace(/[^0-9.]+/g, '')
-                           this.value = e.target.value
-                       }}
-                    />
-                )
-            }
-        }
+        const categories = Category.list
 
         return (
             <div>
@@ -37,13 +23,19 @@ module.exports = {
                        value={expense.name}
                 />
 
-                <label class={"label"}>Category</label>
-                <input type="text"
-                       placeholder="Category"
-                       oninput={e => expense.category = e.target.value}
-                       value={expense.category}
-                />
+                <label class={"label"} for={"categories"}>Category</label>
+                <select name={"categories"}
+                        placeholder="Category"
+                        onchange={e => expense.category = e.target.value}
+                        value={expense.category}
+                >
+                    {categories.map(c => {
+                        return (
+                            <option value={c.id}>{c.name}</option>
+                        )
+                    })}
 
+                </select>
                 <label class={"label"}>Description</label>
                 <input type="text"
                        placeholder="Description"
@@ -71,5 +63,24 @@ module.exports = {
                 }}>Delete</button>
             </div>
         )
-    }
+    },
+
+    // TODO - get this working correctly
+    CurrencyInput: {
+        oninit(vnode) {
+            this.value = (vnode.attrs.value || '').toLowerCase().replace(/[^0-9.]+/g, '')
+        },
+        view(vnode) {
+            return (
+                <input {...vnode.attrs}
+                       value={this.value}
+                       oninput={ e => {
+                           e.preventDefault()
+                           e.target.value = e.target.value.toLowerCase().replace(/[^0-9.]+/g, '')
+                           this.value = e.target.value
+                       }}
+                />
+            )
+        }
+    },
 }

@@ -1,9 +1,12 @@
-var m = require("mithril")
+const m = require("mithril")
 
-var Home = require("./views/Home")
-var ExpenseList = require("./views/ExpenseList")
-var ExpenseForm = require("./views/ExpenseForm")
-var Layout = require("./views/Layout")
+const Home = require("./views/Home")
+const ExpenseList = require("./views/ExpenseList")
+const ExpenseForm = require("./views/ExpenseForm")
+const Categories = require("./views/CategoryList")
+const CategoryForm = require("./views/CategoryForm")
+const SettingsPage = require("./views/Settings")
+const Layout = require("./views/Layout")
 
 m.route(document.body, "/", {
     "/": {
@@ -16,9 +19,25 @@ m.route(document.body, "/", {
             return m(Layout, m(ExpenseList))
         }
     },
+    "/categories": {
+        render: () => {
+            return m(Layout, m(Categories))
+        }
+    },
     "/edit/:id": {
         render: (vnode) => {
             return m(Layout, m(ExpenseForm, vnode.attrs))
         }
     },
+    "/categories/edit/:id": {
+        render: (vnode) => {
+            return m(Layout, m(CategoryForm, vnode.attrs))
+
+        }
+    },
+    "/settings": {
+        render: (vnode) => {
+            return m(Layout, m(SettingsPage, vnode.attrs))
+        }
+    }
 })
