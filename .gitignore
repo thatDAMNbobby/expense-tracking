@@ -1,4 +1,4 @@
 node_modules
 .idea
-bin
+bin/app.js
 webpack.config.js
