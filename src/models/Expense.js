@@ -41,12 +41,6 @@ module.exports = {
             this.list[existingIndex] = this.current
             console.log("save: updated element", existingIndex, "to", this.current)
         } else {
-            // make a new one
-            console.log("save: making a new expense")
-            this.current = {
-                id: this.next,
-                date: Date.now()
-            }
             console.log("new: current is", this.current)
             this.list.push(this.current)
             console.log("save: list appended with", this.current)
@@ -56,7 +50,6 @@ module.exports = {
 
         console.log("save: list is now", this.list)
         this.writeOut()
-        m.route.set('/list')
     },
 
     delete: function(id) {
@@ -80,7 +73,11 @@ module.exports = {
     },
 
     new: function() {
-        this.save()
-        m.route.set('/edit/'+this.current.id)
+        console.log("new: making a new expense")
+        this.current = {
+            id: this.next,
+            date: Date.now()
+        }
+        this.save(this.current.id)
     }
 }

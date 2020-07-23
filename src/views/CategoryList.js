@@ -24,6 +24,7 @@ module.exports = {
                 <button onclick={e => {
                     e.preventDefault()
                     Category.new()
+                    m.route.set('/categories/edit/'+Category.current.id)
                 }}>New</button>
             </div>
         )

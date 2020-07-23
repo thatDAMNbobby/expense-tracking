@@ -50,15 +50,11 @@ module.exports = {
       this.list[existingIndex] = this.current
       console.log("category save: updated element", existingIndex, "to", this.current)
     } else {
-      // make a new one
-      console.log("category save: making a new category")
-      this.current = {id: this.next}
-      console.log("category save: current.id", this.current.id)
+      console.log("category save: id was not found, pushing new one")
       this.list.push(this.current)
     }
 
     this.writeOut()
-    m.route.set('/categories')
   },
 
   find: function(id) {
@@ -66,10 +62,12 @@ module.exports = {
   },
 
   new: function() {
-    this.save()
-    console.log("category new: routing to edit id", this.current.id)
-    m.route.set('/categories/edit/'+this.current.id)
-    this.current = {}
+    // make a new one
+    console.log("category save: making a new category")
+    this.current = {id: this.next}
+    console.log("category save: current.id", this.current.id)
+    this.save(this.current.id)
+
   },
 
   writeOut: function() {

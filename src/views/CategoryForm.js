@@ -20,6 +20,7 @@ module.exports = {
                 />
                 <button onclick={() => {
                     Category.save(vnode.attrs.id)
+                    m.route.set("/categories")
                 }}>Save</button>
             </div>
         )

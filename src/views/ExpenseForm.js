@@ -53,9 +53,10 @@ module.exports = {
                 <DatePicker date={date}
                             onchange={d => expense.date = Date.parse(d)}
                 />
-
+                <br />
                 <button onclick={() => {
                     Expense.save(vnode.attrs.id)
+                    m.route.set('/list')
                 }}>Save</button>
                 <button onclick={() => {
                     Expense.delete(vnode.attrs.id)

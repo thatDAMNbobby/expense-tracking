@@ -30,6 +30,7 @@ module.exports = {
             <button onclick={e => {
                 e.preventDefault()
                 Expense.new()
+                m.route.set('/edit/'+Expense.current.id)
             }}>New</button>
             </div>
         )
