@@ -1,3 +1,4 @@
+![Node.js CI](https://github.com/thatDAMNbobby/expense-tracking/workflows/Node.js%20CI/badge.svg)
 # expense-tracking
 
 A simple application to allow tracking of expenses.
