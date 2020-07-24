@@ -8,10 +8,7 @@ module.exports = {
     view() {
 
         const categories = Category.list
-        console.log("categories", categories)
         const columns = [{name:"name", title:"Name"}]
-
-        console.log("categories rows:", categories)
 
         return (
             <div class={"category-list category-list-table"}>

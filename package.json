@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "c3": "^0.7.18",
+    "d3": "^5.16.0",
     "http-server": "^0.12.3",
     "mithril": "^2.0.4",
     "mithril-datepicker": "^0.9.3",

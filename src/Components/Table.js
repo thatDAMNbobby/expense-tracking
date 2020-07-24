@@ -1,7 +1,7 @@
 var m = require("mithril")
 
 module.exports = {
-    oninit: (vnode) => { console.log(vnode)},
+
     view(vnode) {
 
         const columns = vnode.attrs.columns

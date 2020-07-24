@@ -17,8 +17,6 @@ module.exports = {
             return v
         })
 
-        console.log("expense list: rows", rows)
-
         return (
             <div class={"expense-list"}>
             <Table

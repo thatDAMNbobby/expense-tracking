@@ -4,7 +4,6 @@ var Category = require("../models/Category")
 module.exports = {
 
     oninit: (vnode) => {
-        console.log("category form: attrs", vnode.attrs)
         Category.load(vnode.attrs.id)
     },
     view(vnode) {
