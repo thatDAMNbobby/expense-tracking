@@ -5,7 +5,7 @@ module.exports = {
     view(vnode) {
         return (
             <div class={"main layout"}>
-                <div class={"nav menu"}>
+                <div class={"nav menu"} id={"navigation"}>
                     <m.route.Link href={"/"}>Home</m.route.Link>
                      |
                     <m.route.Link href={"/list"}>Expenses</m.route.Link>

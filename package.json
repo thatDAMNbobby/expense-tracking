@@ -4,9 +4,10 @@
   "description": "Expense tracking mithril app",
   "main": "index.js",
   "scripts": {
-    "start": "http-server & webpack -d --watch"
+    "start": "http-server & webpack -d --watch",
+    "test": "ospec --preload ./test-setup.js"
   },
-  "author": "",
+  "author": "Bobby Wettig",
   "license": "ISC",
   "dependencies": {
     "c3": "^0.7.18",
@@ -18,12 +19,16 @@
     "server": "^1.0.29"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.5",
+    "@babel/core": "^7.11.1",
     "@babel/plugin-transform-react-jsx": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
+    "@babel/register": "^7.10.5",
     "babel-loader": "^8.1.0",
-    "cypress": "^4.11.0",
+    "cypress": "^4.12.1",
+    "jsdom": "^16.3.0",
+    "mithril-query": "^3.1.0",
     "npm-run-all": "^4.1.5",
+    "ospec": "^4.1.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
   }

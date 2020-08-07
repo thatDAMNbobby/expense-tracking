@@ -1,3 +1,4 @@
+var webpack = require('webpack');
 const path = require('path')
 
 module.exports = {
@@ -6,6 +7,11 @@ module.exports = {
         path: path.resolve(__dirname, './bin'),
         filename: 'app.js',
     },
+    plugins: [
+		new webpack.ProvidePlugin({
+			m: 'mithril'
+		})
+	],
     module: {
         rules: [{
             test: /\.js$/,

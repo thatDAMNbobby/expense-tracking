@@ -13,7 +13,8 @@ module.exports = {
         return (
             <div class={"category-list category-list-table"}>
                 <h1>Catgeories</h1>
-                <Table rows={categories}
+                <Table id={"category-list"}
+                       rows={categories}
                        columns={columns}
                        path={"/categories/edit/"}
                        tableClass={"category-list-table"}
@@ -21,7 +22,7 @@ module.exports = {
                 <button onclick={e => {
                     e.preventDefault()
                     Category.new()
-                    m.route.set('/categories/edit/'+Category.current.id)
+                    m.route.set(`/categories/edit/${Category.current.id}`)
                 }}>New</button>
             </div>
         )

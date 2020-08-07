@@ -20,15 +20,18 @@ module.exports = {
         return (
             <div class={"expense-list"}>
             <Table
+                id={"expense-list"}
                 columns={columns}
                 rows={rows}
                 path={"/edit/"}
                 tableClass={"expense-list-table"}
             />
-            <button onclick={e => {
+            <button
+                id={"new-button"}
+                onclick={e => {
                 e.preventDefault()
                 Expense.new()
-                m.route.set('/edit/'+Expense.current.id)
+                m.route.set(`/edit/${Expense.current.id}`)
             }}>New</button>
             </div>
         )

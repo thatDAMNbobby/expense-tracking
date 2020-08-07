@@ -28,6 +28,7 @@ module.exports = {
     },
 
     save: function(id) {
+        this.loadList()
         const existingIndex = this.list.findIndex(v => v.id == id)
 
         if (id && existingIndex !== -1) {

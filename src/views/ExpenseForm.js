@@ -18,6 +18,7 @@ module.exports = {
             <div>
                 <label class={"label"}>Name</label>
                 <input type="text"
+                       id={"name-input"}
                        placeholder="Name"
                        oninput={e => expense.name = e.target.value}
                        value={expense.name}
@@ -25,6 +26,7 @@ module.exports = {
 
                 <label class={"label"} for={"categories"}>Category</label>
                 <select name={"categories"}
+                        id={"category-select"}
                         placeholder="Category"
                         onchange={e => expense.category = e.target.value}
                         value={expense.category}
@@ -38,6 +40,7 @@ module.exports = {
                 </select>
                 <label class={"label"}>Description</label>
                 <input type="text"
+                       id={"description-input"}
                        placeholder="Description"
                        oninput={e => expense.description = e.target.value}
                        value={expense.description}
@@ -46,19 +49,23 @@ module.exports = {
                 <label class={"label"}>Amount</label>
                 <input
                     placeholder="Amount"
+                    value={expense.amount}
+                    id={"amount-input"}
                     onchange={e => expense.amount = e.target.value}
                 />
 
                 <label class={"label"}>Date</label>
-                <DatePicker date={date}
-                            onchange={d => expense.date = Date.parse(d)}
-                />
+                <span id={"date-picker"}>
+                    <DatePicker date={date}
+                                onchange={d => expense.date = Date.parse(d)}
+                    />
+                </span>
                 <br />
-                <button onclick={() => {
+                <button id={"save-button"} onclick={() => {
                     Expense.save(vnode.attrs.id)
                     m.route.set('/list')
                 }}>Save</button>
-                <button onclick={() => {
+                <button id={"delete-button"} onclick={() => {
                     Expense.delete(vnode.attrs.id)
                     m.route.set("/list")
                 }}>Delete</button>

@@ -4,6 +4,7 @@ module.exports = {
 
     view(vnode) {
 
+        const tableId = vnode.attrs.id || "fancy-table"
         const columns = vnode.attrs.columns
         const rows = vnode.attrs.rows
         const path = vnode.attrs.path
@@ -15,7 +16,7 @@ module.exports = {
 
         return (
             <div>
-                <table class={tableClass}>
+                <table class={tableClass} id={tableId}>
 
                     <thead class={headClass}>
                     <tr>
