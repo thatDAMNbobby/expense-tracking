@@ -19,11 +19,11 @@ module.exports = {
                 <table class={tableClass} id={tableId}>
 
                     <thead class={headClass}>
-                    <tr>
-                        {columns.map(h => {
-                            return (<th>{h[colDisplayKey]}</th>)
-                        })}
-                    </tr>
+                        <tr>
+                            {columns.map(h => {
+                                return (<th>{h[colDisplayKey]}</th>)
+                            })}
+                        </tr>
                     </thead>
 
                     <tbody>
